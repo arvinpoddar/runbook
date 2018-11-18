@@ -1,4 +1,4 @@
-# runbook
+# Runbook Generator
 A simple webapp to create procedures and lists with the appearance of Github READMEs. 
 A user can then export their list as a PDF for future reference.
 
