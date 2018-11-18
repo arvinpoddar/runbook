@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+		<title>Runbook Generator</title>
+		<link rel="stylesheet" type="text/css" href="github-markdown.css" />
+		<script src="jquery-3.3.1.min.js"></script>
+		<style>
+			body {
+				box-sizing: border-box;
+				min-width: 300px;
+				max-width: 980px;
+				margin: 0 auto;
+				padding-left: 30px;
+				padding-right: 30px;
+				padding-bottom: 50px;
+				padding-top: 10px;
+			}
+
+			.btn-primary {
+				background-color: #20BDFF;
+				width: auto;
+				cursor: pointer;
+				height: 25px;
+				border-radius: 3px;
+				outline: none;
+				border: 0px;
+				vertical-align: top;
+				display: inline-block;
+				margin-top: 15px;
+				color: white;
+				font-size: 14px;
+				padding-left: 12px;
+				padding-right: 12px;
+				font-weight: bold;
+				transition: 0.5s;
+				-moz-transition: 0.5s;
+				-webkit-transition: 0.5s;
+				-o-transition: 0.5s;
+			}
+
+			.btn-primary:hover {
+				background-color: #8E54E9;
+			}
+
+			.danger {
+				float: right;
+				background-color: #EA384D;
+			}
+
+			.danger:hover {
+				background-color: #DD2476;
+			}
+
+			#list h2 {
+				list-style: none;
+				margin-left: -16px;
+			}
+
+			@media (max-width: 660px) {
+				.btn-primary {
+					text-align: center;
+					margin: 0 auto;
+					margin-top: 5px;
+				}
+
+				.danger {
+					float: none;
+				}
+			}
+
+			@media print {
+		    @page {
+					-webkit-print-color-adjust: exact;
+		      size:215.9mm 279.4mm;
+					margin: 10mm;
+		    }
+		}
+		</style>
+	</head>
+	<body>
+
+	<article class="markdown-body">
+	<div id="outer">
+	<h1 contenteditable="true">Runbook Generator</h1>
+	<ol id="list">
+
+		<li class="generated" contenteditable="true">Add text, code, sections, and notes using the buttons at the bottom.</li>
+
+		<pre class="generated" contenteditable="true"><code>Code blocks look like this!</code></pre>
+
+		<li class="generated" contenteditable="true">To edit anything, simply click the item and edit the content. Everything is a textbox!</li>
+
+		<li class="generated" contenteditable="true">To delete something, clear the item's text and then click the "Delete Empty" button.</li>
+
+		<li class="generated" contenteditable="true">Save your runbook by clicking "Save PDF". Make sure to select "background graphics" in the print dialog.</li>
+
+	</ol>
+
+</div>
+
+<h2 style="font-size: 1px; margin-top: 50px;"></h2>
+
+		<!--<pre lang="no-highlight"><code>This is where you'll write your code</code></pre>
+
+		<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> s <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>JavaScript syntax highlighting<span class="pl-pds">"</span></span>;
+<span class="pl-c1">alert</span>(s);</pre></div>
+
+		<div class="highlight highlight-source-python"><pre>s <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Python syntax highlighting<span class="pl-pds">"</span></span>
+<span class="pl-k">print</span> s</pre></div> -->
+		</article>
+		<button id="addText" class="btn-primary" onclick="addText()">Add Text</button>
+		<button id="addCode" class="btn-primary" onclick="addNote()">Add Note</button>
+		<button id="addCode" class="btn-primary" onclick="addCode()">Add Code</button>
+		<button id="addSec" class="btn-primary" onclick="addHeader()">Add Section</button>
+		<button id="addSec" class="btn-primary" onclick="window.print();">Save PDF</button>
+		<!--<button class="btn-primary" download><a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="index.html">Download</a></button>-->
+		<button id="delete" class="btn-primary danger">Delete Empty</button>
+		<div class="markdown-body" style="margin-top: 30px;">
+			<h6 style="text-align: center; font-weight: light;">Developed by Arvin Poddar. Primary styling by <a href="https://github.com/sindresorhus/github-markdown-css" target="_blank">sindresorhus</a></h6>
+		</div>
+
+	<script>
+		function addText() {
+			var primary = document.getElementById("list");
+			var text=document.createElement("li");
+			text.setAttribute("class", "generated");
+			text.setAttribute("contenteditable", "true");
+			text.innerText = "New Step";
+			primary.append(text);
+		}
+
+		function addNote() {
+			var primary = document.getElementById("list");
+			var wrapper=document.createElement("ul");
+			wrapper.setAttribute("class", "generated");
+			wrapper.setAttribute("contenteditable", "true");
+			wrapper.innerHTML = "<li>Add your note here</li>"
+			primary.append(wrapper);
+		}
+
+		function addCode() {
+			var primary = document.getElementById("list");
+			var wrapper=document.createElement("pre");
+			wrapper.setAttribute("class", "generated");
+			wrapper.setAttribute("contenteditable", "true");
+			wrapper.innerHTML = "<code>Add your code here</code>"
+			primary.append(wrapper);
+		}
+
+		function addHeader() {
+			var primary = document.getElementById("list");
+			var header=document.createElement("h2");
+			header.setAttribute("class", "generated");
+			header.setAttribute("contenteditable", "true");
+			header.innerText = "New Section";
+			primary.append(header);
+		}
+	</script>
+
+	<script>
+	$('#delete').click(function() {
+		$('.generated').each(function() {
+		if ($(this).text() === '') {
+			$(this).remove();
+		}
+	});
+  });
+
+	$(document).ready(function(){
+
+	        $('[contenteditable]').on('paste',function(e) {
+
+	            e.preventDefault();
+
+	            var text = (e.originalEvent || e).clipboardData.getData('text/html') || prompt('Paste something..');
+	            var $result = $('<div></div>').append($(text));
+
+	            $(this).html($result.html());
+
+	            // replace all styles except bold and italic
+	            $.each($(this).find("*"), function(idx, val) {
+
+	                var $item = $(val);
+	                if ($item.length > 0){
+	                   var saveStyle = {
+	                        'font-weight': $item.css('font-weight'),
+	                        'font-style': $item.css('font-style')
+	                    };
+	                    $item.removeAttr('style')
+	                         .removeClass()
+	                         .css(saveStyle);
+	                }
+	            });
+
+	            // remove unnecesary tags (if paste from word)
+	            $(this).children('style').remove();
+	            $(this).children('meta').remove()
+	            $(this).children('link').remove();
+
+	        });
+
+	    });
+	</script>
+	</body>
+</html>
