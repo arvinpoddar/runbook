@@ -699,18 +699,10 @@
   border-bottom-color: #eee;
 }
 
-.markdown-body input, .markdown-body textarea {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0px;
-  outline: none;
-  background: none;
-  resize: none;
-  font-size: 16px;
-  height:auto;
+.markdown-body code {
+  font-size: 14px;
 }
 
-.markdown-body code input, .markdown-body code textarea{
-  font-size: 95%;
+.markdown-body pre div code {
+  font-size: 14px;
 }

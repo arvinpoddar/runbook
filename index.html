@@ -16,6 +16,7 @@
 				padding-right: 30px;
 				padding-bottom: 50px;
 				padding-top: 10px;
+				min-height: 100vh;
 			}
 
 			.btn-primary {
@@ -91,22 +92,26 @@
 		}
 		</style>
 	</head>
-	<body>
+	<body id="outside">
 
 	<article class="markdown-body">
 	<div id="outer">
 	<h1 contenteditable="true">Runbook Generator</h1>
 	<ol id="list">
 
-		<li class="generated" contenteditable="true">Add steps, code blocks, sections, and notes using the buttons at the bottom.</li>
+		<li class="generated" id="text1" contenteditable="true">Add steps, code blocks, sections, and notes using the buttons at the bottom.</li>
 
-		<pre class="generated" contenteditable="true"><code>Code blocks look like this!</code></pre>
+			<ul id="notenum1">
+					<li class="generated" id="notenum1" contenteditable="true">To add a new element after a particular item, click the item before clicking an "Add" button to insert the new element directly below.</li>
+			</ul>
 
-		<li class="generated" contenteditable="true">To edit anything, simply click the item and edit the content. Everything is a textbox!</li>
+		<pre class="generated" id="code1" contenteditable="true"><code>Code blocks look like this!</code></pre>
 
-		<li class="generated" contenteditable="true">To delete something, clear the item's text and then click the "Delete Empty" button.</li>
+		<li class="generated" id="text2" contenteditable="true">To edit anything, simply click the item and edit the content. Everything is a textbox!</li>
 
-		<li class="generated" contenteditable="true">Save your runbook by clicking "Save PDF". Make sure to select "background graphics" in the print dialog.</li>
+		<li class="generated" id="text3" contenteditable="true">To delete something, clear the item's text and then click the "Delete Empty" button.</li>
+
+		<li class="generated" id="text4" contenteditable="true">Save your runbook by clicking "Save PDF". Make sure to select "background graphics" in the print dialog.</li>
 
 	</ol>
 
@@ -135,40 +140,96 @@
 		</div>
 
 	<script>
+	var textnum = 4;
+	var notenum = 2;
+	var codenum = 2;
+	var headernum = 1;
+	var child="list";
+
+	var parent = document.getElementById('list');
+	// Register the click event to #parent
+	parent.addEventListener('click', idNode);
+
+	// This is the callback that is invoked on each click
+	function idNode(e) {
+		/* If the node clicked (e.target) is not the
+		|| the registered event listener
+		|| (e.currentTarget = #parent)
+		*/
+		if (e.target !== e.currentTarget) {
+			// Get the #id of clicked node
+			var ID = e.target.id;
+			// Reference e.target by its #id
+			child = document.getElementById(ID);
+
+		}
+		// Log the #id of each e.target at every click
+		console.log(ID);
+
+		// Return the e.target as a DOM node when needed
+		//return child;
+
+	}
+
 		function addText() {
+			textnum ++;
+			console.log(child);
+			var textID = "text" + textnum;
 			var primary = document.getElementById("list");
 			var text=document.createElement("li");
 			text.setAttribute("class", "generated");
+			text.setAttribute("id", textID);
 			text.setAttribute("contenteditable", "true");
 			text.innerText = "New Step";
-			primary.append(text);
+			//child.append(text);
+			var referenceNode = child.nextSibling;
+			primary.insertBefore(text, referenceNode);
+			child = document.getElementById("list").lastChild;
 		}
 
 		function addNote() {
+			notenum ++;
+			var noteID = "note" + notenum;
 			var primary = document.getElementById("list");
 			var wrapper=document.createElement("ul");
 			wrapper.setAttribute("class", "generated");
+			wrapper.setAttribute("id", noteID);
 			wrapper.setAttribute("contenteditable", "true");
-			wrapper.innerHTML = "<li>Add your note here</li>"
-			primary.append(wrapper);
+			wrapper.innerHTML = "<li class='generated' id=" + noteID +">Add your note here</li>"
+			//primary.append(wrapper);
+			var referenceNode = child.nextSibling;
+			primary.insertBefore(wrapper, referenceNode);
+			child = document.getElementById("list").lastChild;
 		}
 
 		function addCode() {
+			codenum ++;
+			var codeID = "code" + codenum;
 			var primary = document.getElementById("list");
 			var wrapper=document.createElement("pre");
 			wrapper.setAttribute("class", "generated");
+			wrapper.setAttribute("id", codeID);
 			wrapper.setAttribute("contenteditable", "true");
 			wrapper.innerHTML = "<code>Add your code here</code>"
-			primary.append(wrapper);
+			//primary.append(wrapper);
+			var referenceNode = child.nextSibling;
+			primary.insertBefore(wrapper, referenceNode);
+			child = document.getElementById("list").lastChild;
 		}
 
 		function addHeader() {
+			headernum ++;
+			var headerID = "header" + headernum;
 			var primary = document.getElementById("list");
 			var header=document.createElement("h2");
 			header.setAttribute("class", "generated");
+			header.setAttribute("id", headerID);
 			header.setAttribute("contenteditable", "true");
 			header.innerText = "New Section";
-			primary.append(header);
+			//primary.append(header);
+			var referenceNode = child.nextSibling;
+			primary.insertBefore(header, referenceNode);
+			child = document.getElementById("list").lastChild;
 		}
 	</script>
 
