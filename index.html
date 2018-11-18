@@ -147,15 +147,8 @@
 	var child="list";
 
 	var parent = document.getElementById('list');
-	// Register the click event to #parent
 	parent.addEventListener('click', idNode);
-
-	// This is the callback that is invoked on each click
 	function idNode(e) {
-		/* If the node clicked (e.target) is not the
-		|| the registered event listener
-		|| (e.currentTarget = #parent)
-		*/
 		if (e.target !== e.currentTarget) {
 			// Get the #id of clicked node
 			var ID = e.target.id;
@@ -164,16 +157,11 @@
 
 		}
 		// Log the #id of each e.target at every click
-		console.log(ID);
-
-		// Return the e.target as a DOM node when needed
-		//return child;
-
+		//console.log(ID);
 	}
 
 		function addText() {
 			textnum ++;
-			console.log(child);
 			var textID = "text" + textnum;
 			var primary = document.getElementById("list");
 			var text=document.createElement("li");
