@@ -58,6 +58,10 @@
 				margin-left: -16px;
 			}
 
+			.credits {
+				margin-top: 30px;
+			}
+
 			@media (max-width: 660px) {
 				.btn-primary {
 					text-align: center;
@@ -71,6 +75,14 @@
 			}
 
 			@media print {
+				.btn-primary {
+					display: none;
+				}
+
+				.credits {
+					margin-top: 10px;
+				}
+
 		    @page {
 					-webkit-print-color-adjust: exact;
 		      size:215.9mm 279.4mm;
@@ -117,8 +129,8 @@
 		<button id="addSec" class="btn-primary" onclick="window.print();">Save PDF</button>
 		<!--<button class="btn-primary" download><a onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="index.html">Download</a></button>-->
 		<button id="delete" class="btn-primary danger">Delete Empty</button>
-		<div class="markdown-body" style="margin-top: 30px;">
-			<h6 style="text-align: center; font-weight: light;">Developed by Arvin Poddar. Primary styling by <a href="https://github.com/sindresorhus/github-markdown-css" target="_blank">sindresorhus</a></h6>
+		<div class="markdown-body credits">
+			<h6 style="text-align: center; font-weight: light;">Runbook Generator developed by Arvin Poddar. Primary styling by <a href="https://github.com/sindresorhus/github-markdown-css" target="_blank">sindresorhus</a></h6>
 		</div>
 
 	<script>
